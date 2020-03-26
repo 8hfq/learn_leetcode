@@ -12,7 +12,11 @@ class Solution:
 
         res, p = 0, 'I'
         for c in s[::-1]:
-            res, p = res - d[c] if d[c] < d[p] else res + d[c], c
+            if d[c] <d[p]:
+                res =  res-d[c]
+            else: res =res+d[c]
+            p = c
+        
         return res
 # @lc code=end
 
