@@ -49,8 +49,6 @@ class Solution:
         for i in range(len(nums)):
             if  i>0 and nums[i] == nums[i - 1]:
                 continue
-            # if i<len(nums)-1 and nums[i] == nums[i + 1]:
-            #     continue
             self.dfs(nums[i+1:],path+[nums[i]],res)
         
 # @lc code=end
