@@ -1,22 +1,22 @@
 class Solution:
-    def countAndSay(self, n: int) -> str:
-        nums = ['1' for i in range(n)]
-        if n==1:
-            return nums[-1]
-        for i in range(1,n):
-            res=''
-            count =1
-            after = nums[i-1]
-            for j in range(len(after)): 
-                if j==len(after)-1 or after[j] !=after[j+1]:
-                    res+=str(count)
-                    res+=after[j]
-                else : count+=1
-            nums[i] = res 
-            count =1
-        return nums[-1]
+    def minDistance(self, word1: str, word2: str) -> int:
+        m = len(word1)
+        n = len(word2)
+        table = [[0] * (n+1) for i in range(m+1)]
+        for i in range(m+1):
+            table[i][0] = i
+        for j in range(n+1):
+            table[0][j] = j
+        for i in range(1,m+1):
+            for j in range(1,n+1):
+                if word1[i-1] == word2[j-1]:
+                    table[i][j] = table[i-1][j-1]
+                else: 
+                    table[i][j] = 1+ min(table[i-1][j],table[i][j-1],table[i-1][j-1])
+                print(table[i][j])
+        return table[-1][-1]
                 
 if __name__ == "__main__":
     s = Solution()
-    print(s.countAndSay(5)
+    print(s.minDistance("horse","ros"))
  
