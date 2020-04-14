@@ -1,15 +1,22 @@
-
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 class Solution:
-    def maxProduct(self, nums):
-        A = nums
-        B = A[::-1]
-        for i in range(1, len(A)):
-            A[i] *= A[i-1] or 1
-            B[i] *= B[i-1] or 1
-        print(A)
-        print(B)
-        return max(A+B)
+    def isBalanced(self, root: TreeNode) -> bool:
+        ls = []
+        self.getLayer(root,ls,0)
+        if max(ls) - min(ls) >1:
+            return False
+        else: return True
+    def getLayer(self,root,ls,layer):
+        if not root:
+            ls.append(layer)
+            return
+        return self.getLayer(root.left,ls,layer+1) and self.getLayer(root.right,ls,layer+1)
+
 if __name__ == "__main__":
     s = Solution()
-    print(s.maxProduct([2,3,-2,4]))
+    print(s.isBalanced(TreeNode[1,2,2,3,3,1,1,4,4]))
  

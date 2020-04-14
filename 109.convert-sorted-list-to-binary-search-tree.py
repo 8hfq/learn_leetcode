@@ -53,6 +53,19 @@
 
 class Solution:
     def sortedListToBST(self, head: ListNode) -> TreeNode:
-        
+        ls = []
+        while head:
+            ls.append(head.val)
+            head = head.next
+        return self.build(0,len(ls)-1,ls)
+    def build(self,left,right,nums):
+        if left >right:
+            return None
+        mid = (left+right)//2
+        node = TreeNode(nums[mid])
+        node.left = self.build(left,mid-1,nums)
+        node.right = self.build(mid+1,right,nums)
+        return node
+    
 # @lc code=end
 
