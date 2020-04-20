@@ -1,21 +1,19 @@
 #
-# @lc app=leetcode id=116 lang=python3
+# @lc app=leetcode id=117 lang=python3
 #
-# [116] Populating Next Right Pointers in Each Node
+# [117] Populating Next Right Pointers in Each Node II
 #
-# https://leetcode.com/problems/populating-next-right-pointers-in-each-node/description/
+# https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/description/
 #
 # algorithms
-# Medium (41.75%)
-# Likes:    1638
-# Dislikes: 136
-# Total Accepted:    327.2K
-# Total Submissions: 764.7K
-# Testcase Example:  '[1,2,3,4,5,6,7]'
+# Medium (36.98%)
+# Likes:    1345
+# Dislikes: 169
+# Total Accepted:    233.5K
+# Total Submissions: 621.1K
+# Testcase Example:  '[1,2,3,4,5,null,7]'
 #
-# You are given a perfect binary tree where all leaves are on the same level,
-# and every parent has two children. The binary tree has the following
-# definition:
+# Given a binary tree
 # 
 # 
 # struct Node {
@@ -47,11 +45,11 @@
 # 
 # 
 # 
-# Input: root = [1,2,3,4,5,6,7]
-# Output: [1,#,2,3,#,4,5,6,7,#]
-# Explanation: Given the above perfect binary tree (Figure A), your function
-# should populate each next pointer to point to its next right node, just like
-# in Figure B. The serialized output is in level order as connected by the next
+# Input: root = [1,2,3,4,5,null,7]
+# Output: [1,#,2,3,#,4,5,7,#]
+# Explanation: Given the above binary tree (Figure A), your function should
+# populate each next pointer to point to its next right node, just like in
+# Figure B. The serialized output is in level order as connected by the next
 # pointers, with '#' signifying the end of each level.
 # 
 # 
@@ -59,8 +57,8 @@
 # Constraints:
 # 
 # 
-# The number of nodes in the given tree is less than 4096.
-# -1000 <= node.val <= 1000
+# The number of nodes in the given tree is less than 6000.
+# -100 <= node.val <= 100
 # 
 # 
 #
@@ -85,14 +83,14 @@ class Solution:
             size = len(queue)
             for i in range(size):
                 node = queue.popleft()
-                if i <size-1: 
+                if i <size-1:
                     node.next = queue[0]
                 if node.left:
                     queue.append(node.left)
                 if node.right:
                     queue.append(node.right)
         return root
-    
-            
+                  
+        
 # @lc code=end
 

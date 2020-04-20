@@ -47,6 +47,7 @@
 #         self.left = None
 #         self.right = None
 
+#DFS  
 class Solution:
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
         res = []
@@ -61,5 +62,18 @@ class Solution:
         res[index].append(root.val)
         self.layer(root.left,index+1,res)
         self.layer(root.right,index+1,res)
+
+
+# #queue
+# class Solution:
+#     def levelOrder(self, root: TreeNode) -> List[List[int]]:
+#         queue =[]
+#         res=[]
+#         if root:
+#             queue.put(root.val)
+#         while queue:
+#             i = 
+
+ 
 # @lc code=end
 
