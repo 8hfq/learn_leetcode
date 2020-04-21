@@ -57,7 +57,20 @@
 #         self.right = None
 
 class Solution:
+    def __init__(self):
+        self.current_max = float('-inf')
     def maxPathSum(self, root: TreeNode) -> int:
+        self.dfs(root)
+        return self.current_max
+    
+    def dfs(self,root):
+        if not root:
+            return 0
+        left = max(self.dfs(root.left),0)
+        right = max(self.dfs(root.right),0)
+        self.current_max = max(left+right+root.val,self.current_max)
+        return max(left,right)+root.val
+
         
 # @lc code=end
 
