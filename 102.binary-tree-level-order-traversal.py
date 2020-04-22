@@ -47,33 +47,40 @@
 #         self.left = None
 #         self.right = None
 
-#DFS  
-class Solution:
-    def levelOrder(self, root: TreeNode) -> List[List[int]]:
-        res = []
-        self.layer(root,0,res)
-        return res
-    
-    def layer(self,root,index,res):
-        if not root:
-            return
-        if len(res) == index:
-            res.append([])
-        res[index].append(root.val)
-        self.layer(root.left,index+1,res)
-        self.layer(root.right,index+1,res)
-
-
-# #queue
+# #DFS  
 # class Solution:
 #     def levelOrder(self, root: TreeNode) -> List[List[int]]:
-#         queue =[]
-#         res=[]
-#         if root:
-#             queue.put(root.val)
-#         while queue:
-#             i = 
+#         res = []
+#         self.layer(root,0,res)
+#         return res
+    
+#     def layer(self,root,index,res):
+#         if not root:
+#             return
+#         if len(res) == index:
+#             res.append([])
+#         res[index].append(root.val)
+#         self.layer(root.left,index+1,res)
+#         self.layer(root.right,index+1,res)
 
+
+from collections import deque
+class Solution:
+    def levelOrder(self, root):
+        if not root: return []
+        queue, res = deque([root]), []
+        
+        while queue:
+            cur_level, size = [], len(queue)
+            for i in range(size):
+                node = queue.popleft()
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+                cur_level.append(node.val)
+            res.append(cur_level)
+        return res
  
 # @lc code=end
 
