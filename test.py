@@ -1,20 +1,19 @@
 class Solution:
-    def candy(self, ratings):
-        n = len(ratings)
-        left = [1 for i in range(n)] 
-        right = [1 for i in range(n)]
-        for i in range(1,n):
-            if ratings[i]>ratings[i-1]:
-                left[i] = left[i-1]+1 
-        for j in range(n-2,-1,-1):
-            print(right[j])
-            if ratings[j]>ratings[j+1]:
-                right[j] = right[j+1]+1 
-        res = 0 
-        for i in range(n):
-            res +=max(left[i],right[i])
-        return res      
+    def searchMatrix(self, matrix, target: int) -> bool:
+        if len(matrix) == 0:
+            return False
+        
+        row, col = 0, len(matrix[0]) - 1
+        
+        while row < len(matrix) and col >= 0:
+            if matrix[row][col] == target: return True
+            elif matrix[row][col] < target: row += 1
+            elif matrix[row][col] > target: col -= 1
+        
+        return False
+        
+        return False
 if __name__ == "__main__":
     s = Solution()
-    print(s.candy([1,0,2]))
+    print(s.searchMatrix([[1],[3]],3))
  
