@@ -1,4 +1,10 @@
-from collections import *
+#
+# @lc app=leetcode id=76 lang=python3
+#
+# [76] Minimum Window Substring
+#
+
+# @lc code=start
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
         res =''
@@ -17,9 +23,5 @@ class Solution:
                 c[s[left]]+=1
                 left+=1
         return res
+# @lc code=end
 
-
-if __name__ == "__main__":
-    s = Solution()
-    print(s.minWindow("ADOBECODEBANC",  "ABC"))
- 
