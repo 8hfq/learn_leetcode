@@ -18,7 +18,7 @@ class Solution:
                 if minLen >= i -left+1:
                     minLen =i-left+1
                     res = s[left:i+1]
-                if c[s[left]] >=0:
+                if c[s[left]] ==0:
                     cnt-=1
                 c[s[left]]+=1
                 left+=1
