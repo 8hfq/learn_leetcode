@@ -1,24 +1,24 @@
 #
-# @lc app=leetcode id=127 lang=python3
+# @lc app=leetcode id=126 lang=python3
 #
-# [127] Word Ladder
+# [126] Word Ladder II
 #
-# https://leetcode.com/problems/word-ladder/description/
+# https://leetcode.com/problems/word-ladder-ii/description/
 #
 # algorithms
-# Medium (27.46%)
-# Likes:    2581
-# Dislikes: 1031
-# Total Accepted:    376.2K
-# Total Submissions: 1.3M
+# Hard (20.39%)
+# Likes:    1517
+# Dislikes: 222
+# Total Accepted:    164.6K
+# Total Submissions: 794.4K
 # Testcase Example:  '"hit"\n"cog"\n["hot","dot","dog","lot","log","cog"]'
 #
 # Given two words (beginWord and endWord), and a dictionary's word list, find
-# the length of shortest transformation sequence from beginWord to endWord,
-# such that:
+# all shortest transformation sequence(s) from beginWord to endWord, such
+# that:
 # 
 # 
-# Only one letter can be changed at a time.
+# Only one letter can be changed at a time
 # Each transformed word must exist in the word list. Note that beginWord is not
 # a transformed word.
 # 
@@ -26,7 +26,7 @@
 # Note:
 # 
 # 
-# Return 0 if there is no such transformation sequence.
+# Return an empty list if there is no such transformation sequence.
 # All words have the same length.
 # All words contain only lowercase alphabetic characters.
 # You may assume no duplicates in the word list.
@@ -41,11 +41,11 @@
 # endWord = "cog",
 # wordList = ["hot","dot","dog","lot","log","cog"]
 # 
-# Output: 5
-# 
-# Explanation: As one shortest transformation is "hit" -> "hot" -> "dot" ->
-# "dog" -> "cog",
-# return its length 5.
+# Output:
+# [
+# ⁠ ["hit","hot","dot","dog","cog"],
+# ["hit","hot","lot","log","cog"]
+# ]
 # 
 # 
 # Example 2:
@@ -56,7 +56,7 @@
 # endWord = "cog"
 # wordList = ["hot","dot","dog","lot","log"]
 # 
-# Output: 0
+# Output: []
 # 
 # Explanation: The endWord "cog" is not in wordList, therefore no possible
 # transformation.
@@ -69,12 +69,18 @@
 
 # @lc code=start
 class Solution:
-    def ladderLength(self, beginWord: str, endWord: str, wordList) -> int:
+    def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List[List[str]]:
         res = []
-        self.dfs(beginWord,endWord,wordList,1,res)
+        self.dfs(beginWord,endWord,wordList,[beginWord],res)
         if not res:
-            return 0
-        return min(res)
+            return []
+        minlen = len(min(res,key=len))
+        result = []
+        for  x in res:
+            if len(x) ==minlen:
+                result.append(x)
+        return result
+
     def isOnlyOneChange(self,a,b):
         n = len(a)
         j =0
@@ -82,18 +88,20 @@ class Solution:
             if a[i]!=b[i]:
                 j+=1
         return j==1
-    def dfs(self,word,endWord,list,index,res):
-        if res and index>= min(res):
+    
+    def dfs(self,word,endWord,wordList,path,res):
+        if res and len(path) > len(min(res)):
             return
         if word ==endWord:
-            res.append(index)
+            res.append(path)
+        if not wordList:
             return
-        if not list:
-            return
-        print(list)
-        for i,x in enumerate(list):
-            if self.isOnlyOneChange(word,x):
-                self.dfs(x,endWord,list[:i]+list[i+1:],index+1,res)
         
+        for i,x in enumerate(wordList):
+            if self.isOnlyOneChange(word,x):
+                self.dfs(x,endWord,wordList[:i]+wordList[i+1:],path+[x],res)
+
+
+
 # @lc code=end
 
