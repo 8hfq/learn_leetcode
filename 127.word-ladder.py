@@ -90,7 +90,6 @@ class Solution:
             return
         if not list:
             return
-        print(list)
         for i,x in enumerate(list):
             if self.isOnlyOneChange(word,x):
                 self.dfs(x,endWord,list[:i]+list[i+1:],index+1,res)
